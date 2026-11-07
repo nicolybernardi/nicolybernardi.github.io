@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nicoly Bernardi — Editora de vídeo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f2f7; --surface:#ffffff; --ink:#1e1b2e; --muted:#5d5a70; --line:#dcdae6;
+  --violet:#7b61ff; --teal:#12a594; --coral:#f0604f; --amber:#e8a317; --on-clip:#ffffff;
+  --head:"Bricolage Grotesque","Trebuchet MS",sans-serif; --body:"DM Sans","Segoe UI",Arial,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#17151f;--surface:#211e2c;--ink:#f1eff8;--muted:#a8a4bd;--line:#35314a;--violet:#9b87ff;--teal:#2dc4b1;--coral:#ff7b6b;--amber:#f4b93a;--on-clip:#17151f}
+}
+:root[data-theme="dark"]{--bg:#17151f;--surface:#211e2c;--ink:#f1eff8;--muted:#a8a4bd;--line:#35314a;--violet:#9b87ff;--teal:#2dc4b1;--coral:#ff7b6b;--amber:#f4b93a;--on-clip:#17151f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:4px}
+
+.hero{padding:4rem 0 2.5rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);font-weight:800;letter-spacing:-.03em}
+.hero p.lead{max-width:36rem;margin:1.25rem 0 0;font-size:1.25rem;color:var(--muted)}
+
+.timeline{margin-top:2.5rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.9rem;position:relative;overflow:hidden}
+.ruler{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);padding:0 .15rem .5rem;border-bottom:1px solid var(--line);margin-bottom:.6rem}
+.track{position:relative;height:2.4rem;margin-bottom:.4rem;background:color-mix(in srgb,var(--line) 35%,transparent);border-radius:6px}
+.clip{position:absolute;top:3px;bottom:3px;border-radius:5px;color:var(--on-clip);font-size:.8rem;font-weight:700;display:flex;align-items:center;padding:0 .6rem;white-space:nowrap;overflow:hidden}
+.v{background:var(--violet)}.t{background:var(--teal)}.c{background:var(--coral)}.a{background:var(--amber)}
+.playhead{position:absolute;top:0;bottom:0;left:62%;width:2px;background:var(--coral)}
+.playhead::before{content:"";position:absolute;top:0;left:-5px;border:6px solid transparent;border-top-color:var(--coral)}
+@media (prefers-reduced-motion:no-preference){
+  .playhead{animation:scrub 2.6s cubic-bezier(.5,0,.2,1) 1}
+  @keyframes scrub{from{left:2%}to{left:62%}}
+}
+
+section{padding:3rem 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:700;margin-bottom:1.25rem}
+
+.services{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.services li{display:grid;grid-template-columns:.6rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.services li:last-child{border-bottom:0}
+.dot{width:.6rem;border-radius:3px}
+.services h3{font-size:1.25rem;font-weight:700}
+.services p{margin:.25rem 0 0;color:var(--muted)}
+
+.job{display:grid;gap:.4rem;padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:0}
+.job header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;align-items:baseline}
+.job h3{font-size:1.35rem}
+.job .when{color:var(--muted);font-size:.95rem}
+.job ul{margin:.4rem 0 0;padding-left:1.2rem;max-width:44rem}
+.job li{margin:.2rem 0}
+
+.cols{display:grid;gap:2rem}
+@media (min-width:44rem){.cols{grid-template-columns:1fr 1fr}}
+.tools{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:0;list-style:none}
+.tools li{border:1.5px solid var(--ink);border-radius:999px;padding:.3rem .9rem;font-weight:500}
+.plain p{margin:.1rem 0}
+.plain .m{color:var(--muted);margin-bottom:.9rem}
+
+.contact{padding-bottom:4rem}
+.contact p{max-width:34rem;font-size:1.15rem}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+.btn{display:inline-block;text-decoration:none;font-weight:700;padding:.8rem 1.4rem;border-radius:10px;background:var(--ink);color:var(--bg)}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <h1>Nicoly Bernardi</h1>
+    <p class="lead">Editora de vídeo e estudante de Jornalismo em Cascavel, Paraná. Edito reportagens, reels e vinhetas, e estou disponível para trabalhos freelance.</p>
+    <div class="timeline" role="img" aria-label="Linha do tempo de edição com faixas de reportagem, reels, vinheta e motion graphics">
+      <div class="ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span></div>
+      <div class="track"><div class="clip v" style="left:2%;width:34%">Reportagem</div><div class="clip v" style="left:38%;width:26%">Edição geral</div><div class="clip v" style="left:66%;width:30%">Cortes e ritmo</div></div>
+      <div class="track"><div class="clip t" style="left:10%;width:30%">Reels 9:16</div><div class="clip t" style="left:48%;width:22%">Reels 9:16</div></div>
+      <div class="track"><div class="clip a" style="left:2%;width:14%">Vinheta</div><div class="clip a" style="left:80%;width:16%">Vinheta</div></div>
+      <div class="track"><div class="clip c" style="left:30%;width:36%">Motion graphics</div></div>
+      <div class="playhead" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>O que eu edito</h2>
+    <ul class="services">
+      <li><span class="dot" style="background:var(--violet)"></span><div><h3>Reportagens</h3><p>Montagem de reportagens com imagens, entrevistas e narração, no formato de telejornalismo.</p></div></li>
+      <li><span class="dot" style="background:var(--teal)"></span><div><h3>Vídeos verticais para reels</h3><p>Cortes rápidos no formato 9:16 para Instagram e outras redes sociais.</p></div></li>
+      <li><span class="dot" style="background:var(--amber)"></span><div><h3>Vinhetas</h3><p>Aberturas e encerramentos para dar identidade ao seu conteúdo.</p></div></li>
+      <li><span class="dot" style="background:var(--coral)"></span><div><h3>Edição em geral e motion graphics</h3><p>Edição completa de vídeos, com familiaridade em motion graphics.</p></div></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Experiência em edição</h2>
+    <article class="job">
+      <header><h3>CATVE — Editora de vídeo</h3><span class="when">2026 até hoje</span></header>
+      <ul><li>Edição de vídeo</li><li>Uso do pacote Adobe</li><li>Motion graphics</li></ul>
+    </article>
+    <article class="job">
+      <header><h3>FAG — Curso de Jornalismo</h3><span class="when">Cursando</span></header>
+      <ul><li>Reportagens</li><li>Edição em geral</li><li>Vídeos verticais para reels</li><li>Vinhetas</li></ul>
+    </article>
+    <article class="job">
+      <header><h3>Mythus Assistência Técnica — Social media</h3><span class="when">2025 – 2026</span></header>
+      <ul><li>Gestão de redes sociais e atendimento ao público presencial e por WhatsApp</li></ul>
+    </article>
+  </section>
+
+  <section class="cols">
+    <div>
+      <h2>Ferramentas</h2>
+      <ul class="tools"><li>Pacote Adobe</li><li>Motion graphics</li><li>Pacote Office</li><li>Excel</li></ul>
+    </div>
+    <div class="plain">
+      <h2>Formação e idiomas</h2>
+      <p><strong>Jornalismo</strong></p><p class="m">FAG, Cascavel – cursando</p>
+      <p><strong>Ensino Médio</strong></p><p class="m">Completo</p>
+      <p><strong>Cursos</strong></p><p class="m">Informática, Excel, Adobe e Office</p>
+      <p><strong>Inglês</strong></p><p class="m">Fluente</p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Vamos trabalhar juntos?</h2>
+    <p>Me conte o que você precisa editar e o prazo. Respondo por e-mail ou telefone.</p>
+    <div class="btns">
+      <a class="btn" href="mailto:nicolydesouza44@gmail.com">Enviar e-mail</a>
+      <a class="btn alt" href="tel:+554588283962">(45) 8828-3962</a>
+    </div>
+  </section>
+  <footer>Nicoly Bernardi · Coqueiral, Cascavel – PR</footer>
+</main>
+</body>
+</html>
