@@ -77,11 +77,16 @@ section h2{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:700;margin-bottom:1.25
 button.btn{font:inherit;font-weight:700;cursor:pointer}
 .contact p.mail{margin:1rem 0 0;font-size:1rem;color:var(--muted)}
 footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+.lang{display:flex;justify-content:flex-end;gap:.35rem;padding-top:1.1rem}
+.lang button{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:8px;padding:.25rem .75rem}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang button:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
 </style>
 </head>
 <body>
 <main class="wrap">
   <header class="hero">
+    <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-l="pt" aria-pressed="true">PT</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
     <h1>Nicoly Bernardi</h1>
     <p class="lead">Editora de vídeo e estudante de Jornalismo em Cascavel, Paraná. Edito reportagens, reels e vinhetas, e estou disponível para trabalhos freelance.</p>
     <div class="timeline" role="img" aria-label="Linha do tempo de edição com faixas de reportagem, reels, vinheta e motion graphics">
@@ -159,12 +164,52 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px s
   if(!b)return;
   b.addEventListener('click',function(){
     var e='nicolydesouza44@gmail.com';
-    function ok(){b.textContent='E-mail copiado!';setTimeout(function(){b.textContent='Copiar e-mail'},2000)}
+    function ok(){var T=window.__tr||{};b.textContent=T.copied||'E-mail copiado!';setTimeout(function(){b.textContent=T.copy||'Copiar e-mail'},2000)}
     try{
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(e).then(ok,function(){window.prompt('Copie o e-mail:',e)})}
       else{window.prompt('Copie o e-mail:',e)}
     }catch(x){window.prompt('Copie o e-mail:',e)}
   });
+})();
+</script>
+<script>
+(function(){
+  var M={
+    "Editora de vídeo e estudante de Jornalismo em Cascavel, Paraná. Edito reportagens, reels e vinhetas, e estou disponível para trabalhos freelance.":"Video editor and Journalism student in Cascavel, Paraná, Brazil. I edit news reports, reels and intros, and I’m available for freelance work.",
+    "Reportagem":"News report","Edição geral":"General editing","Cortes e ritmo":"Cuts and pacing","Vinheta":"Intro",
+    "O que eu edito":"What I edit","Experiência em edição":"Editing experience","Habilidades":"Skills","Ferramentas":"Tools","Formação e idiomas":"Education and languages","Vamos trabalhar juntos?":"Let’s work together?",
+    "Reportagens":"News reports","Montagem de reportagens com imagens, entrevistas e narração, no formato de telejornalismo.":"Editing news reports with footage, interviews and narration, in a TV news format.",
+    "Vídeos verticais para reels":"Vertical videos for Reels","Cortes rápidos no formato 9:16 para Instagram e outras redes sociais.":"Fast cuts in 9:16 format for Instagram and other social media.",
+    "Vinhetas":"Intros","Aberturas e encerramentos para dar identidade ao seu conteúdo.":"Openers and closers that give your content its own identity.",
+    "Edição em geral e motion graphics":"General editing and motion graphics","Edição completa de vídeos, com familiaridade em motion graphics.":"Full video editing, with experience in motion graphics.",
+    "CATVE — Editora de vídeo":"CATVE — Video editor","2026 até hoje":"2026 – present","Edição de vídeo":"Video editing","Uso do pacote Adobe":"Adobe suite","Edição no Alight Motion e no CapCut":"Editing in Alight Motion and CapCut",
+    "FAG — Curso de Jornalismo":"FAG — Journalism degree","Cursando":"In progress","Edição em geral":"General editing",
+    "Mythus Assistência Técnica — Social media":"Mythus Technical Support — Social media","Gestão de redes sociais e atendimento ao público presencial e por WhatsApp":"Social media management and customer service, in person and via WhatsApp",
+    "Storytelling e linguagem audiovisual":"Storytelling and audiovisual language","Trabalho em equipe":"Teamwork","Cumprimento de prazos":"Meeting deadlines","Criatividade":"Creativity","Proatividade":"Proactivity","Agilidade":"Speed","Atenção aos detalhes":"Attention to detail",
+    "Pacote Adobe":"Adobe suite","Pacote Office":"Microsoft Office",
+    "Jornalismo":"Journalism","FAG, Cascavel – cursando":"FAG, Cascavel – in progress","Ensino Médio":"High school","Completo":"Completed","Cursos":"Courses","Informática, Excel, Adobe e Office":"IT, Excel, Adobe and Office","Inglês":"English","Fluente":"Fluent",
+    "Me conte o que você precisa editar e o prazo. Respondo por e-mail ou telefone.":"Tell me what you need edited and your deadline. I reply by email or phone.",
+    "Escrever no Gmail":"Write on Gmail","Copiar e-mail":"Copy email",
+    "Nicoly Bernardi · Coqueiral, Cascavel – PR":"Nicoly Bernardi · Coqueiral, Cascavel, Brazil"
+  };
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),all=[],n;
+  while((n=w.nextNode())){if(n.parentNode.tagName!=='SCRIPT'&&n.nodeValue.trim()){n.__pt=n.nodeValue;all.push(n)}}
+  var tl=document.querySelector('.timeline'),gm=document.querySelector('a[href^="https://mail.google.com"]');
+  var ptTitle=document.title,ptLabel=tl.getAttribute('aria-label');
+  function mail(s){return 'https://mail.google.com/mail/?view=cm&fs=1&to=nicolydesouza44@gmail.com&su='+encodeURIComponent(s)}
+  function apply(en){
+    all.forEach(function(x){var k=x.__pt.trim();x.nodeValue=(en&&M[k])?x.__pt.replace(k,M[k]):x.__pt});
+    document.documentElement.lang=en?'en':'pt-BR';
+    document.title=en?'Nicoly Bernardi — Video editor':ptTitle;
+    tl.setAttribute('aria-label',en?'Editing timeline with news report, reels, intro and motion graphics tracks':ptLabel);
+    if(gm)gm.href=mail(en?'Video editing quote':'Orçamento de edição de vídeo');
+    window.__tr=en?{copy:'Copy email',copied:'Email copied!'}:{};
+    document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String((b.dataset.l==='en')===en))});
+    try{localStorage.setItem('lang',en?'en':'pt')}catch(e){}
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.l==='en')})});
+  var saved=null;try{saved=localStorage.getItem('lang')}catch(e){}
+  if(saved==='en')apply(true);
 })();
 </script>
 </body>
