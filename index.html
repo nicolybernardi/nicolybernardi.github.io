@@ -72,6 +72,8 @@ section h2{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:700;margin-bottom:1.25
 .btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
 .btn{display:inline-block;text-decoration:none;font-weight:700;padding:.8rem 1.4rem;border-radius:10px;background:var(--ink);color:var(--bg)}
 .btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+button.btn{font:inherit;font-weight:700;cursor:pointer}
+.contact p.mail{margin:1rem 0 0;font-size:1rem;color:var(--muted)}
 footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
 </style>
 </head>
@@ -104,11 +106,11 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px s
     <h2>Experiência em edição</h2>
     <article class="job">
       <header><h3>CATVE — Editora de vídeo</h3><span class="when">2026 até hoje</span></header>
-      <ul><li>Edição de vídeo</li><li>Uso do pacote Adobe</li><li>Motion graphics</li></ul>
+      <ul><li>Edição de vídeo</li><li>Uso do pacote Adobe</li><li>Motion graphics</li><li>Edição no Alight Motion e no CapCut</li></ul>
     </article>
     <article class="job">
       <header><h3>FAG — Curso de Jornalismo</h3><span class="when">Cursando</span></header>
-      <ul><li>Reportagens</li><li>Edição em geral</li><li>Vídeos verticais para reels</li><li>Vinhetas</li></ul>
+      <ul><li>Reportagens</li><li>Edição em geral</li><li>Vídeos verticais para reels</li><li>Vinhetas</li><li>Edição no Alight Motion e no CapCut</li></ul>
     </article>
     <article class="job">
       <header><h3>Mythus Assistência Técnica — Social media</h3><span class="when">2025 – 2026</span></header>
@@ -119,7 +121,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px s
   <section class="cols">
     <div>
       <h2>Ferramentas</h2>
-      <ul class="tools"><li>Pacote Adobe</li><li>Motion graphics</li><li>Pacote Office</li><li>Excel</li></ul>
+      <ul class="tools"><li>Pacote Adobe</li><li>Alight Motion</li><li>CapCut</li><li>Motion graphics</li><li>Pacote Office</li><li>Excel</li></ul>
     </div>
     <div class="plain">
       <h2>Formação e idiomas</h2>
@@ -134,11 +136,27 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;border-top:1px s
     <h2>Vamos trabalhar juntos?</h2>
     <p>Me conte o que você precisa editar e o prazo. Respondo por e-mail ou telefone.</p>
     <div class="btns">
-      <a class="btn" href="mailto:nicolydesouza44@gmail.com">Enviar e-mail</a>
+      <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=nicolydesouza44@gmail.com&su=Or%C3%A7amento%20de%20edi%C3%A7%C3%A3o%20de%20v%C3%ADdeo" target="_blank" rel="noopener">Escrever no Gmail</a>
+      <button class="btn alt" type="button" id="copy">Copiar e-mail</button>
       <a class="btn alt" href="tel:+554588283962">(45) 8828-3962</a>
     </div>
+    <p class="mail">nicolydesouza44@gmail.com</p>
   </section>
   <footer>Nicoly Bernardi · Coqueiral, Cascavel – PR</footer>
 </main>
+<script>
+(function(){
+  var b=document.getElementById('copy');
+  if(!b)return;
+  b.addEventListener('click',function(){
+    var e='nicolydesouza44@gmail.com';
+    function ok(){b.textContent='E-mail copiado!';setTimeout(function(){b.textContent='Copiar e-mail'},2000)}
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(e).then(ok,function(){window.prompt('Copie o e-mail:',e)})}
+      else{window.prompt('Copie o e-mail:',e)}
+    }catch(x){window.prompt('Copie o e-mail:',e)}
+  });
+})();
+</script>
 </body>
 </html>
